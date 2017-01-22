@@ -1,0 +1,39 @@
+<h3 ng-init='onLoad()'>Welcome <span ng-bind='currentUserName'></span>! <button><a href="#!/">Logout</a></button></h3>
+<a href="#!/">Logout</a><br>
+<label><input ng-model="filterText.topic">Search</label>
+<table>
+    <thead>
+        <tr>
+            <th><a ng-click="sortType = 'category'; sortReverse = !sortReverse">Category</a></th>
+            <th><a ng-click="sortType = 'title'; sortReverse = !sortReverse">Topic</a></th>
+            <th><a ng-click="sortType = 'user.name'; sortReverse = !sortReverse">User Name</a></th>
+            <th><a ng-click="sortType = 'posts'; sortReverse = !sortReverse">Posts</a></th>
+            <th><a ng-click="sortType = 'created_at'; sortReverse = !sortReverse">Create Date</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat='topic in topiclist | orderBy:sortType:sortReverse | filter:filterText'>
+            <td ng-bind='topic.category'></td>
+            <td><a ng-bind='topic.title' href='#!/topic/{{topic._id}}'></a></td>
+            <td><a ng-bind='topic.user.name' href='#!/user/{{topic.user._id}}'></td>
+            <td ng-bind='topic.posts'></td>
+            <td ng-bind='topic.created_at'></td>
+        </tr>
+    </tbody>
+</table>
+<form name='nTopicForm' nonvalidate>
+    <h3>Add a new topic</h3>
+    <label>Topic :<br><input type="text" ng-model='nTopic.title' required></label><br>
+    <label>Description :<br><textarea type="text" ng-model='nTopic.description' required></textarea></label><br>
+    <label>Category :
+        <select ng-model='nTopic.category' required>
+            <option value="biscuits">biscuits</option>
+            <option value="tea-cozies">tea-cozies</option>
+            <option value="AI">AI</option>
+            <option value="numerology">numerology</option>
+            <option value="SQL">SQL</option>
+            <option value="non-relational DBs">non-relational DBs</option>
+        </select>
+    </label>
+    <input type="submit" value="Submit" ng-click='addTopic() && $scope.nTopicForm.$setPristine()' ng-disabled='nTopicForm.$invalid'>
+</form><br>

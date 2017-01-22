@@ -1,0 +1,22 @@
+{
+  "name": "DiscussionBoard03",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "alm958 <alm958@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1",
+    "angular-cookies": "^1.6.1"
+  }
+}
