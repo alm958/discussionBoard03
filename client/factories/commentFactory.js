@@ -1,8 +1,8 @@
-app.factory('commentFactory', ['$http', function($http){
+app.factory('commentFactory', ['$http', '$route','$routeParams', function( $http, $route, $routeParams ){
     var factory = {};
     factory.commentlist = [];
     factory.addComment = function(comment, callback){
-        $http.post('/comments', comment)
+        $http.post(`/comments/topic/${id}`, comment)
             .then(function(addedComment){
                 factory.commentlist.push(addedComment);
                 callback();
@@ -12,13 +12,19 @@ app.factory('commentFactory', ['$http', function($http){
             });
     }
     factory.getComments = function(callback){
-        $http.get(`/comments/topic/${Tid}`)
+        var id = $route.current.params.id;
+        $http.get(`/comments/topic/${id}`)
             .then(function(comments){
-                return comments;
+                factory.commentlist = comments.data
+                callback(factory.commentlist);
             })
             .catch(function(err){
                 console.log(err);
             });
+    }
+    factory.getInitComments = function(){
+        var id = $route.current.params.id;
+        return $http.get(`/comments/topic/${id}`)
     }
 
     return factory;

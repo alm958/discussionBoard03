@@ -19,13 +19,13 @@ app.config(['$routeProvider', function($routeProvider){
         resolve: {
             topic: function(topicFactory){
                 return topicFactory.findTopicById();
+            },
+            posts: function(postFactory){
+                return postFactory.getInitPosts();
+            },
+            comments: function(commentFactory){
+                return commentFactory.getInitComments();
             }
-            // posts: function(postFactory){
-            //     return postFactory.getPosts();
-            // },
-            // comments: function(commentFactory){
-            //     return mommentFactory.getComments();
-            // }}
         }
     })
     .otherwise({

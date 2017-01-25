@@ -26,15 +26,15 @@ app.factory('topicFactory', ['$http','$route','$routeParams', function($http, $r
         console.log('in t-factory find topic by id');
         var id = $route.current.params.id;
         console.log(id);
-        $http.get(`/topics/${id}`)
-            .then(function(topic){
-                console.log('********************');
-                console.log(topic);
-                return topic;
-            })
-            .catch(function(err){
-                console.log(err);
-            });
+        return $http.get(`/topics/${id}`)
+            // .then(function(topic){
+            //     console.log('********************');
+            //     console.log(topic);
+            //     return topic;
+            // })
+            // .catch(function(err){
+            //     console.log(err);
+            // });
     }
     factory.updateTopic = function(topic){
         $http.put(`/topics/${topic._id}`, topic)

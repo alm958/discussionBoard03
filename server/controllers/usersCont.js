@@ -58,22 +58,25 @@ module.exports = {
         console.log("in update");
         console.log(req.params.id);
         console.log(req.body);
-        User.findByIdAndUpdate(req.params.id, req.body, { new: true})
+        User.findByIdAndUpdate({_id: req.params.id}, {$inc:{postcount:1}}, { new: true})
             .then(function(updatedUser){
+                console.log('back from mongoose post count increment');
                 console.log(updatedUser);
                 res.json(updatedUser);
             })
             .catch(function(err){
+                console.log('in mongoose post count increment catch statment');
                 console.log(err);
                 res.json(err);
             });
     },
-    updatePostCount: function(req, res){
+    updateCommentCount: function(req, res){
         console.log("in update");
         console.log(req.params.id);
         console.log(req.body);
-        User.findByIdAndUpdate(req.params.id, req.body, { new: true})
+        User.findByIdAndUpdate({_id: req.params.id}, {$inc:{commentcount:1}}, { new: true})
             .then(function(updatedUser){
+                console.log('back from mongoose comment count increment');
                 console.log(updatedUser);
                 res.json(updatedUser);
             })

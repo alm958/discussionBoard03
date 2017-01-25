@@ -14,7 +14,7 @@ module.exports = {
             });
     },
     index: function(req, res){
-        Comment.find({'post': req.params.Tid}).populate('user', 'name')
+        Comment.find({'topic':req.params.id}).populate('user', 'name')
             .then(function(comments){
                 res.json(comments);
             })

@@ -1,2 +1,21 @@
 <h1 ng-init='setInit()'>topic</h1>
-<h3 ng-bind='topic'></h3>
+<h3><span ng-bind='topic.user.name'></span> posted a topic:</h3>
+<h4 ng-bind='topic.title'></h4>
+<p ng-bind='topic.description'></p>
+<h3>Post your answer here...</h3>
+<form name='nPostForm' nonvalidate>
+    <textarea type="text" ng-model='nPost.content' required></textarea></label>
+    <input type="submit" value="Post" ng-click='addPost() && $scope.nPostForm.$setPristine()' ng-disabled='nPostForm.$invalid'>
+</form>
+<div ng-repeat='post in postlist | orderBy:sortType:sortReverse'>
+
+<p><a ng-bind='post.user.name' href='#!/user/{{post.user._id}}'></a> : <span ng-bind='post.content'></span>  <span ng-bind='post.upvote' style='color:green'></span>  <button type="button" name="like" ng-click='upvote(post._id)'>like</button>  <span ng-bind='post.downvote' style='color:red'></span>  <button type='button' name='dislike' ng-click='downvote(post._id)'>dislike</button></p>
+    <div ng-repeat='comment in commentlist'>
+        <p><a ng-bind='comment.user.name' href='#!/user/{{comment.user._id}}'></a> : <span ng-bind='comment.content'></span></p>
+    </div>
+    <form name='nCommentForm' nonvalidate>
+        <input type="text" name='postid' ng-model='nComment.post' ng-value='post._id'>
+        <textarea type="text" ng-model='nComment.content' required></textarea>
+        <input type="submit" value="Comment" ng-click='addComment(nComment) && $scope.nCommentForm.$setPristine()' ng-disabled='nCommentForm.$invalid'>
+    </form>
+</div>

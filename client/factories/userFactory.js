@@ -42,6 +42,29 @@ app.factory('userFactory', ['$http', '$location', '$cookies', function($http, $l
                 console.log(err);
             });
     }
+    factory.updatePostCount = function(userid){
+        console.log('in factory updatePostcount');
+        console.log(userid);
+        $http.put(`/users/posts/${userid}`)
+            .then(function(response){
+                console.log('back from server post updatePostcount');
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+    }
+    factory.updateCommentCount = function(userid){
+        console.log('in factory updateCommentcount');
+        console.log(userid);
+        $http.put(`/users/comments/${userid}`)
+            .then(function(response){
+                console.log('back from server post updateCommentcount');
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+    }
+
 
 
     return factory;

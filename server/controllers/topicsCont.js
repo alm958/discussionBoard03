@@ -25,7 +25,7 @@ module.exports = {
             });
     },
     getOneById: function(req, res){
-        Topic.findById(req.params.id)
+        Topic.findById(req.params.id).populate('user', 'name')
             .then(function(topic){
                 res.json(topic);
             })
